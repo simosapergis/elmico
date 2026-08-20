@@ -6,7 +6,7 @@ import { business, ui } from '../data/site';
 
 <BaseLayout
   title="Λογιστικές και φοροτεχνικές υπηρεσίες στην Αθήνα | Elmico"
-  description="Η Elmico παρέχει λογιστικές, φοροτεχνικές και συμβουλευτικές υπηρεσίες σε επιχειρήσεις και ιδιώτες στο κέντρο της Αθήνας."
+  description="Η Elmico παρέχει λογιστικές, φοροτεχνικές και συμβουλευτικές υπηρεσίες σε επιχειρήσεις και ιδιώτες."
 >
   <section class="hero">
     <div class="container-shell hero-grid">
@@ -16,12 +16,14 @@ import { business, ui } from '../data/site';
         <p class="lead">Ολοκληρωμένη λογιστική και φοροτεχνική υποστήριξη, με συνέπεια στην ενημέρωση, στις υποχρεώσεις και στις ανάγκες κάθε συνεργάτη.</p>
         <div class="hero-actions">
           <a class="button-primary" href={`tel:${business.phoneHref}`}>{ui.callNow}</a>
-          <a class="button-secondary" href="/ypiresies-epixeiriseis/">Δείτε τις υπηρεσίες</a>
+          <a class="button-secondary" href="#services">Δείτε τις υπηρεσίες</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="Στοιχεία επικοινωνίας">
-        <span class="panel-kicker">Στο κέντρο της Αθήνας</span>
-        <p class="panel-address">{business.address.street}<br />{business.address.city}, {business.address.postalCode}</p>
+        <p class="panel-address">
+          <span>{business.address.street}</span>
+          <span class="panel-location">{business.address.city}, {business.address.postalCode}</span>
+        </p>
         <div class="panel-rule"></div>
         <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
         <a href={`mailto:${business.email}`}>{business.email}</a>
@@ -29,7 +31,7 @@ import { business, ui } from '../data/site';
     </div>
   </section>
 
-  <section class="section-space services" aria-labelledby="services-title">
+  <section id="services" class="section-space services" aria-labelledby="services-title">
     <div class="container-shell">
       <div class="section-heading">
         <div>
@@ -72,7 +74,7 @@ import { business, ui } from '../data/site';
     </div>
   </section>
 
-  <section class="contact-strip" aria-labelledby="contact-title">
+  <section id="contact" class="contact-strip" aria-labelledby="contact-title">
     <div class="container-shell contact-strip-inner">
       <div>
         <span class="eyebrow">Επικοινωνία</span>
@@ -112,6 +114,11 @@ import { business, ui } from '../data/site';
     margin-top: 2rem;
   }
 
+  #services,
+  #contact {
+    scroll-margin-top: 1.5rem;
+  }
+
   .hero-panel {
     display: flex;
     justify-content: flex-end;
@@ -121,19 +128,23 @@ import { business, ui } from '../data/site';
     padding: clamp(2rem, 5vw, 4rem);
   }
 
-  .panel-kicker {
-    color: #dcecf8;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
+  .panel-address {
+    margin: 0 0 1rem;
   }
 
-  .panel-address {
-    margin: 1rem 0;
+  .panel-address > span:first-child {
+    display: block;
     font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 720;
     line-height: 1.25;
+  }
+
+  .panel-location {
+    display: block;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    white-space: nowrap;
   }
 
   .panel-rule {
