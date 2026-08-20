@@ -1,0 +1,103 @@
+---
+import { business, navigation } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container-shell footer-grid">
+    <div class="footer-intro">
+      <img src="/images/elmico-logo.webp" alt="" width="125" height="115" loading="lazy" />
+      <p>{business.description}</p>
+    </div>
+    <nav aria-label="Πλοήγηση υποσέλιδου">
+      <h2>Πλοήγηση</h2>
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div>
+      <h2>Επικοινωνία</h2>
+      <address>
+        <span>{business.address.street}, {business.address.city} {business.address.postalCode}</span>
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+        <a href={`mailto:${business.email}`}>{business.email}</a>
+      </address>
+    </div>
+  </div>
+  <div class="container-shell copyright">
+    <span>© {new Date().getFullYear()} Elmico</span>
+    <span>Λογιστικές – Φοροτεχνικές Υπηρεσίες</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #10243d;
+    color: #dcecf8;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    padding-block: 4.5rem;
+  }
+
+  .footer-intro img {
+    width: 4.5rem;
+    height: auto;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-intro p {
+    max-width: 38ch;
+    margin: 0;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    color: white;
+    font-size: 0.83rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  nav a,
+  address a,
+  address span {
+    display: block;
+    width: fit-content;
+    margin-bottom: 0.55rem;
+    color: #dcecf8;
+    font-style: normal;
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  address a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .copyright {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+    color: #b8c7d4;
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 760px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .copyright {
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 1rem;
+    }
+  }
+</style>

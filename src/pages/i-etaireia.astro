@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+---
+
+<BaseLayout
+  title="Η εταιρεία — Λογιστικό και φοροτεχνικό γραφείο στην Αθήνα"
+  description="Γνωρίστε την Elmico, το λογιστικό και φοροτεχνικό γραφείο που παρέχει υποστήριξη σε επιχειρήσεις και ιδιώτες στο κέντρο της Αθήνας."
+>
+  <PageHero
+    eyebrow="Η Elmico"
+    title="Συνέπεια, ενημέρωση και προσωπική επικοινωνία."
+    intro="Λογιστικές, φοροτεχνικές και συμβουλευτικές υπηρεσίες με επίκεντρο τις πραγματικές ανάγκες κάθε επιχείρησης και φυσικού προσώπου."
+  />
+
+  <section class="section-space story" aria-labelledby="story-title">
+    <div class="container-shell story-grid">
+      <div>
+        <span class="eyebrow">Ποιοι είμαστε</span>
+        <h2 class="section-title" id="story-title">Ένα γραφείο με σταθερή παρουσία στο κέντρο της Αθήνας.</h2>
+      </div>
+      <div class="prose">
+        <p>Το λογιστικό – φοροτεχνικό γραφείο ιδρύθηκε το 1989 από δύο λογιστές Α΄ τάξεως, την Ελπίδα Φρέρη και τον Μιχάλη Τσιμπόγλου. Με το πέρασμα του χρόνου και την αύξηση του πελατολογίου, η ομάδα του γραφείου μεγάλωσε.</p>
+        <p>Η συνέπεια, η άμεση ενημέρωση για τις αλλαγές στη φορολογική και ασφαλιστική νομοθεσία, η ανταπόκριση στις ανάγκες των πελατών και η τήρηση των προθεσμιών αποτελούν βασικές αρχές της λειτουργίας μας.</p>
+        <p>Υποστηρίζουμε επιχειρήσεις και ιδιώτες, παρέχοντας ολοκληρωμένες υπηρεσίες για τη διευθέτηση λογιστικών, φορολογικών και οικονομικών θεμάτων.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space principles" aria-labelledby="principles-title">
+    <div class="container-shell">
+      <span class="eyebrow">Ο τρόπος που εργαζόμαστε</span>
+      <h2 class="section-title" id="principles-title">Πρακτική υποστήριξη σε κάθε στάδιο.</h2>
+      <div class="principle-grid">
+        <article>
+          <span>01</span>
+          <h3>Γνώση και ενημέρωση</h3>
+          <p>Παρακολουθούμε τις αλλαγές στο λογιστικό, φορολογικό και ασφαλιστικό περιβάλλον.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Συνέπεια</h3>
+          <p>Οργανώνουμε τις υποχρεώσεις και τις προθεσμίες με υπευθυνότητα και σαφή επικοινωνία.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Εχεμύθεια</h3>
+          <p>Χειριζόμαστε κάθε υπόθεση με επαγγελματισμό και σεβασμό στην εμπιστευτικότητα.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .story-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .story .section-title,
+  .principles .section-title {
+    margin-top: 1.15rem;
+  }
+
+  .prose p {
+    margin: 0 0 1.4rem;
+    color: #36536e;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+
+  .principles {
+    background: #f4f1eb;
+  }
+
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: 3.5rem;
+  }
+
+  article {
+    border-top: 1px solid #b8c7d4;
+    padding-top: 1.5rem;
+  }
+
+  article > span {
+    color: #8a5a16;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  h3 {
+    margin: 1rem 0 0.65rem;
+    font-size: 1.35rem;
+  }
+
+  article p {
+    margin: 0;
+    color: #36536e;
+  }
+
+  @media (max-width: 760px) {
+    .story-grid,
+    .principle-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

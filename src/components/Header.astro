@@ -1,0 +1,222 @@
+---
+import { business, navigation, ui } from '../data/site';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<a class="skip-link" href="#main-content">{ui.skipToContent}</a>
+<header class="site-header">
+  <div class="contact-bar">
+    <div class="container-shell contact-inner">
+      <span>Λογιστικές – Φοροτεχνικές Υπηρεσίες</span>
+      <div class="contact-links">
+        <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+        <a href={`mailto:${business.email}`}>{business.email}</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <div class="container-shell nav-inner">
+      <a class="brand" href="/" aria-label="Elmico — Αρχική">
+        <img src="/images/elmico-logo.webp" alt="Elmico" width="125" height="115" />
+        <span>Λογιστικές υπηρεσίες</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Κύρια πλοήγηση">
+        {navigation.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+
+      <details class="mobile-menu">
+        <summary>{ui.menu}</summary>
+        <nav aria-label="Πλοήγηση για κινητά">
+          {navigation.map((item) => (
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 0.75rem;
+    left: 0.75rem;
+    transform: translateY(-180%);
+    border-radius: 0.25rem;
+    background: white;
+    padding: 0.7rem 1rem;
+    color: #10243d;
+    font-weight: 750;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .site-header {
+    position: relative;
+    z-index: 20;
+    border-bottom: 1px solid #d7e0e8;
+    background: white;
+  }
+
+  .contact-bar {
+    background: #10243d;
+    color: #dcecf8;
+    font-size: 0.78rem;
+  }
+
+  .contact-inner,
+  .contact-links,
+  .nav-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-inner {
+    min-height: 2.5rem;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .contact-links {
+    gap: 1.4rem;
+  }
+
+  .contact-links a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .contact-links a:hover {
+    text-decoration: underline;
+  }
+
+  .nav-inner {
+    min-height: 5.6rem;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #10243d;
+    font-size: 0.73rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .brand img {
+    width: 3.9rem;
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(14%) sepia(14%) saturate(2394%) hue-rotate(174deg) brightness(94%);
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+
+  .desktop-nav a {
+    border-bottom: 2px solid transparent;
+    color: #36536e;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .desktop-nav a:hover,
+  .desktop-nav a[aria-current='page'] {
+    border-color: #8a5a16;
+    color: #10243d;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: relative;
+  }
+
+  .mobile-menu summary {
+    min-width: 4.5rem;
+    cursor: pointer;
+    border: 1px solid #b8c7d4;
+    border-radius: 0.25rem;
+    padding: 0.55rem 0.75rem;
+    color: #10243d;
+    font-weight: 750;
+    list-style: none;
+    text-align: center;
+  }
+
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-menu nav {
+    position: absolute;
+    top: calc(100% + 0.8rem);
+    right: 0;
+    width: min(19rem, calc(100vw - 2rem));
+    border: 1px solid #d7e0e8;
+    border-radius: 0.35rem;
+    background: white;
+    box-shadow: 0 20px 60px rgba(16, 36, 61, 0.16);
+    padding: 0.6rem;
+  }
+
+  .mobile-menu nav a {
+    display: block;
+    border-radius: 0.2rem;
+    padding: 0.75rem 0.85rem;
+    color: #25415e;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .mobile-menu nav a:hover,
+  .mobile-menu nav a[aria-current='page'] {
+    background: #f0f7fc;
+    color: #175b92;
+  }
+
+  @media (max-width: 960px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact-inner > span,
+    .contact-links a:last-child,
+    .brand span {
+      display: none;
+    }
+
+    .contact-inner {
+      justify-content: flex-end;
+    }
+
+    .nav-inner {
+      min-height: 4.8rem;
+    }
+
+    .brand img {
+      width: 3.25rem;
+    }
+  }
+</style>

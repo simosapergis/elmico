@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Η σελίδα δεν βρέθηκε"
+  description="Η σελίδα που αναζητάτε δεν είναι διαθέσιμη. Επιστρέψτε στην αρχική σελίδα της Elmico."
+  noindex
+  canonicalPath="/404.html"
+  includeSchema={false}
+>
+  <section class="not-found">
+    <div class="container-shell">
+      <span class="code">404</span>
+      <h1>Η σελίδα δεν βρέθηκε.</h1>
+      <p class="lead">Η διεύθυνση μπορεί να έχει αλλάξει ή η σελίδα να μην είναι πλέον διαθέσιμη.</p>
+      <a class="button-primary" href="/">Επιστροφή στην αρχική</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    min-height: 60vh;
+    align-items: center;
+    background: #f0f7fc;
+    padding-block: 5rem;
+    text-align: center;
+  }
+
+  .code {
+    color: #8a5a16;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  h1 {
+    margin: 0.9rem 0 1rem;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  .lead {
+    margin: 0 auto 2rem;
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { usefulResources } from '../data/site';
+---
+
+<BaseLayout
+  title="Χρήσιμοι σύνδεσμοι για φορολογία και επιχειρήσεις"
+  description="Επιλεγμένοι επίσημοι σύνδεσμοι για φορολογία, κοινωνική ασφάλιση, επιχειρήσεις, οικονομικά και στατιστικά στοιχεία."
+>
+  <PageHero
+    eyebrow="Χρήσιμα"
+    title="Επίσημες ψηφιακές υπηρεσίες σε ένα σημείο."
+    intro="Μια σύντομη, επιλεγμένη συλλογή επίσημων πηγών για φορολογικά, ασφαλιστικά και επιχειρηματικά θέματα."
+  />
+
+  <section class="section-space" aria-labelledby="resources-title">
+    <div class="container-shell">
+      <h2 class="sr-only" id="resources-title">Χρήσιμοι επίσημοι σύνδεσμοι</h2>
+      <div class="resource-groups">
+        {usefulResources.map((group, index) => (
+          <section class="resource-group" aria-labelledby={`resource-group-${index + 1}`}>
+            <h2 id={`resource-group-${index + 1}`}>{group.category}</h2>
+            <ul>
+              {group.links.map((link) => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    <span>{link.label}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <p>{link.description}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <p class="resource-note">Οι σύνδεσμοι οδηγούν σε εξωτερικούς, επίσημους ιστοτόπους. Η διαθεσιμότητα και το περιεχόμενό τους ελέγχονται από τους αντίστοιχους φορείς.</p>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .resource-groups {
+    display: grid;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  .resource-group {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: clamp(2rem, 7vw, 6rem);
+  }
+
+  .resource-group h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    line-height: 1.2;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    border-top: 1px solid #d7e0e8;
+    padding-block: 1.15rem;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid #d7e0e8;
+  }
+
+  li a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #175b92;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  li a:hover span:first-child {
+    text-decoration: underline;
+  }
+
+  li p {
+    margin: 0.35rem 0 0;
+    color: #36536e;
+    font-size: 0.94rem;
+  }
+
+  .resource-note {
+    max-width: 75ch;
+    margin: 3rem 0 0;
+    color: #526c83;
+    font-size: 0.88rem;
+  }
+
+  @media (max-width: 760px) {
+    .resource-group {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

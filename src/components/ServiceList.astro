@@ -1,0 +1,52 @@
+---
+interface Props {
+  items: readonly string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="service-list">
+  {items.map((item, index) => (
+    <li>
+      <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <p>{item}</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .service-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    border-top: 1px solid #d7e0e8;
+    padding-block: 1.15rem;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid #d7e0e8;
+  }
+
+  span {
+    color: #8a5a16;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  p {
+    margin: 0;
+    color: #25415e;
+    font-size: clamp(1rem, 1.7vw, 1.16rem);
+    font-weight: 620;
+  }
+</style>

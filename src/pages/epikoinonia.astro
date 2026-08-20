@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { business, ui } from '../data/site';
+
+const directionsUrl = 'https://www.google.com/maps/search/?api=1&query=%CE%95%CF%81%CE%BC%CE%BF%CF%8D+74%2C+%CE%91%CE%B8%CE%AE%CE%BD%CE%B1+10551';
+---
+
+<BaseLayout
+  title="Επικοινωνία με την Elmico στην Αθήνα"
+  description="Επικοινωνήστε με την Elmico για λογιστικές και φοροτεχνικές υπηρεσίες. Ερμού 74, Αθήνα 105 51, τηλέφωνο +30 210 321 6980."
+>
+  <PageHero
+    eyebrow="Επικοινωνία"
+    title="Είμαστε στη διάθεσή σας."
+    intro="Για οποιαδήποτε απορία ή πληροφορία, επικοινωνήστε μαζί μας τηλεφωνικά ή μέσω email."
+  />
+
+  <section class="section-space contact-section" aria-labelledby="contact-details-title">
+    <div class="container-shell contact-grid">
+      <div>
+        <span class="eyebrow">Στοιχεία γραφείου</span>
+        <h2 class="section-title" id="contact-details-title">Επικοινωνήστε με τον τρόπο που σας εξυπηρετεί.</h2>
+      </div>
+      <div class="contact-details">
+        <article>
+          <span class="label">Τηλέφωνο</span>
+          <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+          <p>Καλέστε μας για πληροφορίες ή για να προγραμματίσετε επικοινωνία.</p>
+        </article>
+        <article>
+          <span class="label">Email</span>
+          <a href={`mailto:${business.email}`}>{business.email}</a>
+          <p>Στείλτε μας το ερώτημά σας και τα στοιχεία επικοινωνίας σας.</p>
+        </article>
+        <article>
+          <span class="label">Διεύθυνση</span>
+          <address>{business.address.street}<br />{business.address.city}, {business.address.postalCode}</address>
+          <a class="directions" href={directionsUrl} target="_blank" rel="noopener noreferrer">Οδηγίες μετάβασης <span aria-hidden="true">↗</span></a>
+        </article>
+        <div class="actions">
+          <a class="button-primary" href={`tel:${business.phoneHref}`}>{ui.callNow}</a>
+          <a class="button-secondary" href={`mailto:${business.email}`}>{ui.sendEmail}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-section {
+    min-height: 34rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .contact-grid .section-title {
+    margin-top: 1.1rem;
+  }
+
+  .contact-details {
+    display: grid;
+  }
+
+  article {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    column-gap: 1.25rem;
+    border-top: 1px solid #d7e0e8;
+    padding-block: 1.5rem;
+  }
+
+  .label {
+    grid-row: span 2;
+    color: #526c83;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  article > a:not(.directions),
+  address {
+    width: fit-content;
+    color: #10243d;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-style: normal;
+    font-weight: 750;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  article > a:not(.directions):hover {
+    color: #175b92;
+    text-decoration: underline;
+  }
+
+  article p {
+    margin: 0.35rem 0 0;
+    color: #526c83;
+  }
+
+  .directions {
+    grid-column: 2;
+    width: fit-content;
+    margin-top: 0.65rem;
+    color: #175b92;
+    font-weight: 750;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    border-top: 1px solid #d7e0e8;
+    padding-top: 1.5rem;
+  }
+
+  @media (max-width: 760px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    article {
+      grid-template-columns: 1fr;
+    }
+
+    .label {
+      grid-row: auto;
+      margin-bottom: 0.65rem;
+    }
+
+    .directions {
+      grid-column: auto;
+    }
+
+    .actions {
+      flex-direction: column;
+    }
+  }
+</style>
