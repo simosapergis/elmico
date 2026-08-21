@@ -703,6 +703,24 @@ A static business website should contain as little client-side JavaScript as rea
 
 ⸻
 
+23.1 Motion and Route Transition Baseline
+
+Motion is optional. When a content-focused business site benefits from it, use this restrained default before considering anything more elaborate:
+
+* Use Astro’s built-in `ClientRouter` for a subtle route transition; do not add an animation or routing library for this purpose.
+* Use short hover feedback for interactive controls only: color or background-color changes and, where useful, a `transform` lift of no more than 2px. Keep these transitions approximately 120–200ms.
+* Use smooth scrolling only for purposeful same-page anchors. Native CSS scrolling is preferred when duration control is not required. If a slower custom duration is approved, scope a small script to local fragment links only, preserve the URL hash, and keep it around 500–700ms.
+* Always honour `prefers-reduced-motion`: disable smooth scrolling and non-essential transitions, and do not replace them with a different animated effect.
+* Let unsupported browsers retain normal full-page navigation. A transition must never be required to use a link, navigate with the keyboard, or understand the page.
+
+Do not add automatic scroll-reveal effects, looping/decorative animations, animated counters, carousels, parallax, or large entrance animations by default.
+
+Only animate compositor-friendly properties such as `transform` and `opacity`; avoid animations of layout or paint-heavy properties such as `width`, `height`, `top`, `left`, filters, or large shadows.
+
+After enabling route or custom scroll transitions, rerun a production mobile Lighthouse audit and compare it with the pre-change baseline. Keep the transition only when performance, accessibility, and navigation remain acceptable.
+
+⸻
+
 24. Third-Party Services
 
 Minimize third-party dependencies.

@@ -1,25 +1,25 @@
 # Elmico website
 
-Στατικός, ελληνόφωνος ιστότοπος της Elmico, χτισμένος με Astro και Tailwind CSS.
+A static, Greek-language website for Elmico, built with Astro and Tailwind CSS.
 
-Απαιτεί Node.js **22.12 ή νεότερο** (προτείνεται η τρέχουσα έκδοση LTS).
+Requires Node.js **22.12 or later** (the current LTS release is recommended).
 
-## Τοπική χρήση
+## Local development
 
 ```sh
 npm install
 npm run dev
 ```
 
-## Έλεγχοι
+## Checks
 
 ```sh
 npm run build
 npm run qa
 ```
 
-Το περιεχόμενο βρίσκεται κεντρικά στο `src/data/site.ts`, ώστε να μπορεί να ενημερώνεται χωρίς αλλαγές στα επαναχρησιμοποιήσιμα components.
+Content is centrally maintained in `src/data/site.ts`, so it can be updated without changing the reusable components.
 
-## Γλώσσες
+## Languages
 
-Η αρχική έκδοση δημοσιεύεται μόνο στα ελληνικά. Οι διαθέσιμες γλώσσες ορίζονται κεντρικά στο `src/i18n/config.ts`, ώστε να μπορεί να προστεθεί αργότερα πλήρες αγγλικό περιεχόμενο με διαδρομές `/en/`.
+The initial release is published in Greek only. Supported languages are centrally configured in `src/i18n/config.ts`, allowing complete English content to be added later under `/en/` routes.
