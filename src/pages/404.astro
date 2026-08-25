@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
 ---
 
 <BaseLayout
@@ -14,7 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <span class="code">404</span>
       <h1>Η σελίδα δεν βρέθηκε.</h1>
       <p class="lead">Η διεύθυνση μπορεί να έχει αλλάξει ή η σελίδα να μην είναι πλέον διαθέσιμη.</p>
-      <a class="button-primary" href="/">Επιστροφή στην αρχική</a>
+      <a class="button-primary" href={withBase('/')}>Επιστροφή στην αρχική</a>
     </div>
   </section>
 </BaseLayout>

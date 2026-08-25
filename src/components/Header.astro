@@ -1,7 +1,11 @@
 ---
 import { business, navigation, ui } from '../data/site';
+import { withBase } from '../utils/paths';
 
-const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+const pathname = base === '/'
+  ? Astro.url.pathname
+  : Astro.url.pathname.replace(base.slice(0, -1), '') || '/';
 const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 
@@ -18,14 +22,14 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
   </div>
   <div class="nav-bar">
     <div class="container-shell nav-inner">
-      <a class="brand" href="/" aria-label="Elmico — Αρχική">
-        <img src="/images/elmico-logo.webp" alt="Elmico" width="125" height="115" />
+      <a class="brand" href={withBase('/')} aria-label="Elmico — Αρχική">
+        <img src={withBase('/images/elmico-logo.webp')} alt="Elmico" width="125" height="115" />
         <span>Λογιστικές υπηρεσίες</span>
       </a>
 
       <nav class="desktop-nav" aria-label="Κύρια πλοήγηση">
         {navigation.map((item) => (
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+          <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
       </nav>
 
@@ -33,7 +37,7 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
         <summary>{ui.menu}</summary>
         <nav aria-label="Πλοήγηση για κινητά">
           {navigation.map((item) => (
-            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+            <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
           ))}
         </nav>
       </details>

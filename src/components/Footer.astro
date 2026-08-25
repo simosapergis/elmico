@@ -1,16 +1,17 @@
 ---
 import { business, navigation } from '../data/site';
+import { withBase } from '../utils/paths';
 ---
 
 <footer class="site-footer">
   <div class="container-shell footer-grid">
     <div class="footer-intro">
-      <img src="/images/elmico-logo.webp" alt="" width="125" height="115" loading="lazy" />
+      <img src={withBase('/images/elmico-logo.webp')} alt="" width="125" height="115" loading="lazy" />
       <p>{business.description}</p>
     </div>
     <nav aria-label="Πλοήγηση υποσέλιδου">
       <h2>Πλοήγηση</h2>
-      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      {navigation.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
     </nav>
     <div>
       <h2>Επικοινωνία</h2>

@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
 import { business } from '../data/site';
 import { defaultLocale } from '../i18n/config';
+import { withBase } from '../utils/paths';
 import '../styles/global.css';
 
 interface Props {
@@ -49,7 +50,7 @@ const schema = {
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="el" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
-    <link rel="icon" type="image/png" href="/images/elmico-logo.png" />
+    <link rel="icon" type="image/png" href={withBase('/images/elmico-logo.png')} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="el_GR" />
     <meta property="og:site_name" content="Elmico" />
