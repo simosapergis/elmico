@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { clientLogos } from '../data/client-logos';
+---
+
+<BaseLayout
+  title="Πελάτες - Επιλογή λογοτύπων"
+  description="Προσωρινή σελίδα επιλογής λογοτύπων πελατών της ELMiCo."
+  noindex={true}
+  includeSchema={false}
+>
+  <section class="section-space" aria-labelledby="client-logos-title">
+    <div class="container-shell">
+      <h1 class="sr-only" id="client-logos-title">Πελάτες</h1>
+      <div class="logo-grid">
+        {clientLogos.map((logo) => (
+          <figure>
+            <div class="logo-frame">
+              <img src={logo.src} alt={`Λογότυπο ${logo.name}`} width="150" height="150" loading="lazy" />
+            </div>
+            <figcaption>
+              <span>{logo.id}</span>
+              {logo.name}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .logo-frame {
+    display: grid;
+    min-height: 12rem;
+    place-items: center;
+    border: 1px solid #d7e0e8;
+    background: white;
+    padding: 1.25rem;
+  }
+
+  img {
+    width: min(100%, 9.375rem);
+    height: 9.375rem;
+    object-fit: contain;
+  }
+
+  figcaption {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+    padding-top: 0.75rem;
+    color: #36536e;
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  figcaption span {
+    flex: 0 0 auto;
+    color: #8a5a16;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 800px) {
+    .logo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .logo-frame {
+      min-height: 9rem;
+      padding: 1rem;
+    }
+
+    img {
+      height: 7rem;
+    }
+  }
+</style>
