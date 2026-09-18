@@ -1,6 +1,6 @@
-# Elmico website
+# ELMiCo website
 
-A static, Greek-language website for Elmico, built with Astro and Tailwind CSS.
+A static, Greek-language website for ELMiCo, built with Astro and Tailwind CSS.
 
 Requires Node.js **22.12 or later** (the current LTS release is recommended).
 
