@@ -62,10 +62,14 @@ import { withBase } from '../utils/paths';
 
   <section class="section-space company-preview">
     <div class="container-shell company-grid">
-      <div class="company-mark" aria-hidden="true">
-        <span>el.</span>
-        <span>mi.co</span>
-      </div>
+      <img
+        class="company-logo"
+        src={withBase('/images/elmico-logo.webp')}
+        alt=""
+        width="125"
+        height="115"
+        loading="lazy"
+      />
       <div>
         <span class="eyebrow">Η εταιρεία</span>
         <h2 class="section-title">Επαγγελματική υποστήριξη με ανθρώπινη επικοινωνία.</h2>
@@ -197,23 +201,14 @@ import { withBase } from '../utils/paths';
     display: grid;
     grid-template-columns: 0.68fr 1.32fr;
     gap: clamp(3rem, 8vw, 8rem);
-    align-items: center;
+    align-items: start;
   }
 
-  .company-mark {
-    display: flex;
-    width: min(100%, 25rem);
-    aspect-ratio: 1;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 1px solid #b8c7d4;
-    border-radius: 50%;
-    color: #175b92;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    line-height: 0.68;
+  .company-logo {
+    width: min(125px, 56vw);
+    height: auto;
+    margin-top: clamp(1.8rem, 3vw, 2.25rem);
+    filter: brightness(0) saturate(100%) invert(14%) sepia(14%) saturate(2394%) hue-rotate(174deg) brightness(94%);
   }
 
   .company-grid .section-title {
@@ -272,8 +267,9 @@ import { withBase } from '../utils/paths';
       align-items: start;
     }
 
-    .company-mark {
-      width: min(72vw, 18rem);
+    .company-logo {
+      width: min(125px, 56vw);
+      margin-top: 0;
     }
 
     .contact-strip-inner {
