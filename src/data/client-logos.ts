@@ -3,7 +3,7 @@ export const clientLogos = [
   { id: '02', name: 'Unigold', src: '/images/client-logos/02.webp' },
   { id: '03', name: 'Anastasopoulou Myrto', src: '/images/client-logos/03.webp' },
   { id: '04', name: 'Sigma Oro', src: '/images/client-logos/04.webp' },
-  { id: '05', name: 'Jekon-cut', src: '/images/client-logos/05.webp' },
+  { id: '05', name: 'Αρχείο πελάτη 05', src: '/images/client-logos/05.webp' },
   { id: '06', name: 'Αρχείο πελάτη 06', src: '/images/client-logos/06.webp' },
   { id: '07', name: 'Georgiadis Nanos', src: '/images/client-logos/07.webp' },
   { id: '08', name: 'Stefos', src: '/images/client-logos/08.webp' },
@@ -13,7 +13,7 @@ export const clientLogos = [
   { id: '12', name: 'Boras', src: '/images/client-logos/12.webp' },
   { id: '14', name: 'Psatha', src: '/images/client-logos/14.webp' },
   { id: '17', name: 'Paraskevopoylos', src: '/images/client-logos/17.webp' },
-  { id: '19', name: 'Kontopidis', src: '/images/client-logos/19.webp' },
+  { id: '19', name: 'Jekon-cut', src: '/images/client-logos/19.webp' },
   { id: '20', name: 'Michopoulos', src: '/images/client-logos/20.webp' },
   { id: '21', name: 'Boulgaris', src: '/images/client-logos/21.webp' },
   { id: '23', name: 'Garofalakis', src: '/images/client-logos/23.webp' },
@@ -26,7 +26,7 @@ export const clientLogos = [
   { id: '32', name: 'Αρχείο πελάτη 32', src: '/images/client-logos/32.webp' },
 ] as const;
 
-const featuredClientLogoIds = ['01', '02', '05', '11', '04'] as const;
+const featuredClientLogoIds = ['01', '02', '19', '11', '04'] as const;
 
 export const featuredClientLogos = featuredClientLogoIds.map(
   (id) => clientLogos.find((logo) => logo.id === id)!,

@@ -17,7 +17,7 @@ interface Props {
 
 const { title, description, noindex = false, canonicalPath, includeSchema = true } = Astro.props;
 const canonical = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
-const fullTitle = title.includes('ELMiCo') ? title : `${title} | ELMiCo`;
+const fullTitle = title.includes('ElMiCo') ? title : `${title} | ElMiCo`;
 const logoUrl = new URL('/images/elmico-logo.png', Astro.site);
 const schema = {
   '@context': 'https://schema.org',
@@ -53,12 +53,12 @@ const schema = {
     <link rel="icon" type="image/png" href={withBase('/images/elmico-logo.png')} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="el_GR" />
-    <meta property="og:site_name" content="ELMiCo" />
+    <meta property="og:site_name" content="ElMiCo" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={logoUrl} />
-    <meta property="og:image:alt" content="Λογότυπο ELMiCo" />
+    <meta property="og:image:alt" content="Λογότυπο ElMiCo" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />

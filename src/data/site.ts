@@ -1,6 +1,6 @@
 export const business = {
-  name: 'ELMiCo',
-  legalName: 'ELMiCo Λογιστικές – Φοροτεχνικές Υπηρεσίες',
+  name: 'ElMiCo',
+  legalName: 'ElMiCo Λογιστικές – Φοροτεχνικές Υπηρεσίες',
   description:
     'Λογιστικές, φοροτεχνικές και συμβουλευτικές υπηρεσίες για επιχειρήσεις και ιδιώτες.',
   url: 'https://elmico.gr',
@@ -88,7 +88,7 @@ export const ui = {
   callNow: 'Καλέστε μας',
   sendEmail: 'Στείλτε email',
   contactUs: 'Επικοινωνήστε μαζί μας',
-  readCompany: 'Γνωρίστε την ELMiCo',
+  readCompany: 'Γνωρίστε την ElMiCo',
   viewBusinessServices: 'Υπηρεσίες για επιχειρήσεις',
   viewIndividualServices: 'Υπηρεσίες για ιδιώτες',
 } as const;
