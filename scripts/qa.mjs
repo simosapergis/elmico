@@ -75,7 +75,7 @@ for (const file of htmlFiles) {
 
 if (!existsSync(join(root, 'sitemap.xml'))) failures.push('Λείπει sitemap.xml');
 if (!existsSync(join(root, 'robots.txt'))) failures.push('Λείπει robots.txt');
-if (htmlFiles.length !== 8) warnings.push(`Αναμένονταν 8 HTML σελίδες, βρέθηκαν ${htmlFiles.length}`);
+if (htmlFiles.length !== 7) warnings.push(`Αναμένονταν 7 HTML σελίδες, βρέθηκαν ${htmlFiles.length}`);
 
 if (failures.length) {
   console.error('FAIL');

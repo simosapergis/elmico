@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import { additionalClientLogos, featuredClientLogos } from '../data/client-logos';
 import { business, ui } from '../data/site';
 import { withBase } from '../utils/paths';
 ---
@@ -76,6 +77,62 @@ import { withBase } from '../utils/paths';
     </div>
   </section>
 
+  <section class="clients-section" aria-labelledby="clients-title">
+    <div class="container-shell">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Πελάτες</span>
+          <h2 class="section-title" id="clients-title">Συνεργασίες με διάρκεια και συνέπεια.</h2>
+        </div>
+        <p class="lead">Επιχειρήσεις και επαγγελματίες που εμπιστεύονται την ELMiCo για λογιστική και φοροτεχνική υποστήριξη.</p>
+      </div>
+
+      <ul class="logo-grid" aria-label="Επιλεγμένα λογότυπα πελατών">
+        {featuredClientLogos.map((logo) => (
+          <li>
+            <div class="logo-frame">
+              <img
+                src={withBase(logo.src)}
+                alt={`Λογότυπο ${logo.name}`}
+                width="150"
+                height="150"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <details class="more-clients">
+        <summary>
+          <span class="show-more-label">Δείτε περισσότερους πελάτες</span>
+          <span class="show-less-label">Λιγότεροι πελάτες</span>
+          <span aria-hidden="true">↓</span>
+        </summary>
+
+        <div class="clients-reveal">
+          <ul class="logo-grid additional-logo-grid" aria-label="Περισσότερα λογότυπα πελατών">
+            {additionalClientLogos.map((logo) => (
+              <li>
+                <div class="logo-frame">
+                  <img
+                    src={withBase(logo.src)}
+                    alt={`Λογότυπο ${logo.name}`}
+                    width="150"
+                    height="150"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
   <section id="contact" class="contact-strip" aria-labelledby="contact-title">
     <div class="container-shell contact-strip-inner">
       <div>
@@ -88,6 +145,36 @@ import { withBase } from '../utils/paths';
       </div>
     </div>
   </section>
+
+  <script>
+    const prepareClientDisclosure = () => {
+      document.querySelectorAll('.more-clients:not([data-disclosure-ready])').forEach((element) => {
+        if (!(element instanceof HTMLDetailsElement)) return;
+
+        const disclosure = element;
+        const summary = disclosure.querySelector('summary');
+        const reveal = disclosure.querySelector('.clients-reveal');
+
+        if (!(summary instanceof HTMLElement) || !(reveal instanceof HTMLElement)) return;
+
+        disclosure.dataset.disclosureReady = 'true';
+
+        summary.addEventListener('click', (event) => {
+          if (!disclosure.open || disclosure.classList.contains('is-closing')) return;
+
+          event.preventDefault();
+          disclosure.classList.add('is-closing');
+
+          reveal.addEventListener('animationend', () => {
+            disclosure.open = false;
+            disclosure.classList.remove('is-closing');
+          }, { once: true });
+        });
+      });
+    };
+
+    document.addEventListener('astro:page-load', prepareClientDisclosure);
+  </script>
 </BaseLayout>
 
 <style>
@@ -201,6 +288,197 @@ import { withBase } from '../utils/paths';
     margin-bottom: 1.75rem;
   }
 
+  .clients-section {
+    background: #f0f7fc;
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .clients-section .section-title {
+    margin-top: 1.1rem;
+  }
+
+  .clients-section .lead {
+    margin: 0;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.75rem, 1.75vw, 1.35rem);
+    margin: clamp(3rem, 6vw, 4.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more-clients {
+    display: grid;
+    justify-items: center;
+    margin-top: clamp(2.25rem, 5vw, 3.5rem);
+  }
+
+  .more-clients summary {
+    display: inline-flex;
+    min-height: 3.15rem;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    border: 1px solid #b8c7d4;
+    border-radius: 0.35rem;
+    background: white;
+    padding: 0.75rem 1.35rem;
+    color: #10243d;
+    font-weight: 750;
+    list-style: none;
+    transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .more-clients summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .more-clients summary:hover {
+    border-color: #175b92;
+    color: #175b92;
+    transform: translateY(-1px);
+  }
+
+  .show-less-label {
+    display: none;
+  }
+
+  .more-clients[open] .show-more-label {
+    display: none;
+  }
+
+  .more-clients[open] .show-less-label {
+    display: inline;
+  }
+
+  .more-clients[open] summary [aria-hidden='true'] {
+    transform: rotate(180deg);
+  }
+
+  .more-clients summary [aria-hidden='true'] {
+    transition: transform 160ms ease;
+  }
+
+  .clients-reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+
+  .more-clients[open] .clients-reveal {
+    animation: reveal-client-grid 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .more-clients.is-closing .clients-reveal {
+    animation: hide-client-grid 280ms cubic-bezier(0.7, 0, 0.84, 0) both;
+  }
+
+  .additional-logo-grid {
+    min-height: 0;
+    overflow: hidden;
+    width: 100%;
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .additional-logo-grid > li {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  .more-clients[open] .additional-logo-grid > li {
+    animation: reveal-client-logo 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .more-clients.is-closing .additional-logo-grid > li {
+    animation: hide-client-logo 180ms ease-in both;
+  }
+
+  .more-clients[open] .additional-logo-grid > li:nth-child(-n + 5) {
+    animation-delay: 120ms;
+  }
+
+  .more-clients[open] .additional-logo-grid > li:nth-child(n + 6):nth-child(-n + 10) {
+    animation-delay: 250ms;
+  }
+
+  .more-clients[open] .additional-logo-grid > li:nth-child(n + 11):nth-child(-n + 15) {
+    animation-delay: 380ms;
+  }
+
+  .more-clients[open] .additional-logo-grid > li:nth-child(n + 16) {
+    animation-delay: 510ms;
+  }
+
+  .logo-frame {
+    display: grid;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid #d7e0e8;
+    background: white;
+    padding: clamp(0.9rem, 2vw, 1.4rem);
+    box-shadow: 0 10px 28px rgba(16, 36, 61, 0.05);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+
+  .logo-frame:hover {
+    border-color: #b8c7d4;
+    box-shadow: 0 16px 34px rgba(16, 36, 61, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .logo-frame img {
+    width: min(100%, 10rem);
+    height: auto;
+    max-height: 10rem;
+    object-fit: contain;
+  }
+
+  @keyframes reveal-client-logo {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-client-grid {
+    from {
+      grid-template-rows: 0fr;
+    }
+
+    to {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  @keyframes hide-client-grid {
+    from {
+      grid-template-rows: 1fr;
+    }
+
+    to {
+      grid-template-rows: 0fr;
+    }
+  }
+
+  @keyframes hide-client-logo {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+  }
+
   .contact-strip {
     padding-block: clamp(3.5rem, 7vw, 5.5rem);
   }
@@ -256,6 +534,30 @@ import { withBase } from '../utils/paths';
       align-items: flex-start;
       flex-direction: column;
     }
+
+    .logo-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(-n + 4) {
+      animation-delay: 120ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 5):nth-child(-n + 8) {
+      animation-delay: 250ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 9):nth-child(-n + 12) {
+      animation-delay: 380ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 13):nth-child(-n + 16) {
+      animation-delay: 510ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 17) {
+      animation-delay: 640ms;
+    }
   }
 
   @media (max-width: 650px) {
@@ -266,6 +568,60 @@ import { withBase } from '../utils/paths';
     .contact-actions {
       width: 100%;
       flex-direction: column;
+    }
+
+    .logo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(-n + 3) {
+      animation-delay: 120ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 4):nth-child(-n + 6) {
+      animation-delay: 250ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 7):nth-child(-n + 9) {
+      animation-delay: 380ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 10):nth-child(-n + 12) {
+      animation-delay: 510ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 13):nth-child(-n + 15) {
+      animation-delay: 640ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 16):nth-child(-n + 18) {
+      animation-delay: 770ms;
+    }
+
+    .more-clients[open] .additional-logo-grid > li:nth-child(n + 19) {
+      animation-delay: 900ms;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .more-clients[open] .clients-reveal {
+      animation: none;
+      grid-template-rows: 1fr;
+    }
+
+    .more-clients.is-closing .clients-reveal {
+      animation: none;
+      grid-template-rows: 0fr;
+    }
+
+    .additional-logo-grid > li {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .more-clients.is-closing .additional-logo-grid > li {
+      opacity: 0;
     }
   }
 </style>

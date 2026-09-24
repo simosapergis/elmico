@@ -22,7 +22,6 @@ export const navigation = [
   { label: 'Η εταιρεία', href: '/i-etaireia/' },
   { label: 'Για επιχειρήσεις', href: '/ypiresies-epixeiriseis/' },
   { label: 'Για ιδιώτες', href: '/ypiresies-idiotes/' },
-  { label: 'Πελάτες', href: '/pelates/' },
   { label: 'Χρήσιμα', href: '/xrisima/' },
   { label: 'Επικοινωνία', href: '/epikoinonia/' },
 ] as const;
