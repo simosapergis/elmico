@@ -5,6 +5,9 @@ node_modules/
 dist/
 .astro/
 
+# Local deployment packages
+elmico-static-*.zip
+
 # Environment files and local secrets
 .env
 .env.*
